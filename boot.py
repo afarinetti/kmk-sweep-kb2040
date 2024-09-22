@@ -7,4 +7,3 @@ bootcfg(
     storage=False,
     usb_id=('KMK Keyboards', 'Ferris Sweep'),
 )
-

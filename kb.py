@@ -29,4 +29,3 @@ class KMKKeyboard(_KMKKeyboard):
                     15, 16,   33, 32
     ]
     # fmt: on
-
