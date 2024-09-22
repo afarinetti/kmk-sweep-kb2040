@@ -1,3 +1,7 @@
+# Replicates default Ferris keymap from QMK
+# Credit: Pierre Chevalier, 2020
+# https://github.com/qmk/qmk_firmware/tree/master/keyboards/ferris/keymaps/default
+
 from kmk.keys import KC
 
 # Cleaner key names
