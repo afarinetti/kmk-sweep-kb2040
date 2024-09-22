@@ -12,8 +12,6 @@ from kmk.modules.layers import Layers
 from kmk.modules.mouse_keys import MouseKeys
 from kmk.modules.split import Split
 
-import keymap
-
 keyboard = KMKKeyboard()
 
 # split_side = SplitSide.LEFT
@@ -75,13 +73,13 @@ layers = RGBLayers()
 
 keyboard.modules = [
     layers,
-    RGBLayers(),
     split,
     holdtap,
     mouse_key,
 ]
 
-keymap.apply(keyboard)
+import keymap_qmk  # noqa: E402
+keyboard.keymap = keymap_qmk.KEYMAP
 
 if __name__ == "__main__":
     keyboard.go()
