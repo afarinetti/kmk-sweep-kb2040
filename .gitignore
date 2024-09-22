@@ -1,5 +1,8 @@
+# kmk stuff
+kmk
 
 # circuitpython stuff
+lib
 settings.toml
 boot_out.txt
 
