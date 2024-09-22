@@ -1,0 +1,7 @@
+
+# circuitpython stuff
+settings.toml
+boot_out.txt
+
+# vscode stuff
+.vscode
