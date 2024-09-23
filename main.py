@@ -74,8 +74,9 @@ keyboard.modules = [
     mouse_key,
 ]
 
-import keymap_qmk  # noqa: E402
-keyboard.keymap = keymap_qmk.KEYMAP
+# import keymap_qmk as keymap  # noqa: E402
+import keymap_miryoku as keymap  # noqa: E402
+keymap.apply(keyboard)
 
 if __name__ == "__main__":
     keyboard.go()

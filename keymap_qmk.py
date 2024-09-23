@@ -2,6 +2,7 @@
 # Credit: Pierre Chevalier, 2020
 # https://github.com/qmk/qmk_firmware/tree/master/keyboards/ferris/keymaps/default
 
+from kb import KMKKeyboard
 from kmk.keys import KC
 
 # Cleaner key names
@@ -25,6 +26,9 @@ J_L4 = KC.LT(4, KC.J)
 K_L2 = KC.LT(2, KC.K)
 L_L6 = KC.LT(6, KC.L)
 SPC_L7 = KC.LT(7, KC.SPC)
+
+def apply(keyboard: KMKKeyboard):
+    keyboard.keymap = KEYMAP
 
 # fmt: off
 KEYMAP = [
