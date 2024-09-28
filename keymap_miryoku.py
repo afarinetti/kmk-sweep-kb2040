@@ -17,11 +17,11 @@ def LT(key_tap: Key, key_Hold: Key) -> Key:
 
 
 def apply(keyboard: KMKKeyboard):
-    combo_layers = {
-        (4, 5): 6,
-        (8, 7): 9,
-    }
-    keyboard.modules.append(Layers(combo_layers))
+    # combo_layers = {
+    #     (4, 5): 6,
+    #     (8, 7): 9,
+    # }
+    # keyboard.modules.append(Layers(combo_layers))
 
     keyboard.modules.extend(
         [
@@ -110,7 +110,7 @@ def apply(keyboard: KMKKeyboard):
             LT(7, KC.BSPC),
             # LT(9, KC.DEL),  # TODO: Ferris Sweep does not have this key (use combo layers)
         ],
-        # TAP - 2x
+        # TAP - 2
         [
             KC.Q,
             KC.W,
