@@ -7,12 +7,16 @@ from kmk.modules.power import Power
 from kmk.modules.tapdance import TapDance
 
 
-def HT(key_tap: Key, key_Hold: Key) -> Key:
-    return KC.HT(key_tap, key_Hold, prefer_hold=False, tap_interrupted=True, tap_time=200)
+def HT(key_tap: Key, key_hold: Key) -> Key:
+    return KC.HT(key_tap, key_hold, prefer_hold=False, tap_interrupted=True, tap_time=200)
 
 
-def LT(key_tap: Key, key_Hold: Key) -> Key:
-    return KC.LT(key_tap, key_Hold, prefer_hold=True, tap_interrupted=False, tap_time=200)
+def LT(key_tap: Key, key_hold: Key) -> Key:
+    return KC.LT(key_tap, key_hold, prefer_hold=True, tap_interrupted=False, tap_time=200)
+
+
+def TD(key_tap: Key, key_tap_dance: Key) -> Key:
+    return KC.TD(key_tap, key_tap_dance, tap_time=200)
 
 
 def apply(keyboard: KMKKeyboard):
@@ -31,40 +35,29 @@ def apply(keyboard: KMKKeyboard):
         ]
     )
 
+    HT_A_LGUI = HT(KC.A, KC.LGUI)
+    HT_R_LALT = HT(KC.R, KC.LALT)
+    HT_S_LCTL = HT(KC.S, KC.LCTL)
+    HT_T_LSFT = HT(KC.T, KC.LSFT)
+
+    HT_N_SHFT = HT(KC.A, KC.LSFT)
+    HT_E_LCTL = HT(KC.R, KC.LCTL)
+    HT_I_LALT = HT(KC.S, KC.LALT)
+    HT_O_LGUI = HT(KC.T, KC.LGUI)
+
+    LT_3_Z = LT(3, KC.Z)
+    # HT_X_RALT = HT(KC.X, KC.RALT)
+    # HT_DOT_RALT = HT(KC.DOT, KC.RALT)
+    LT_3_SLSH = LT(3, KC.SLSH)
+
+    # fmt: off
     keyboard.keymap = [
         # BASE - 0
         [
-            KC.Q, KC.W, KC.F, KC.P, KC.B, KC.J, KC.L, KC.U, KC.Y, KC.QUOT,
-
-            HT(KC.A, KC.LGUI),
-            HT(KC.R, KC.LALT),
-            HT(KC.S, KC.LCTL),
-            HT(KC.T, KC.LSFT),
-            KC.G,
-            KC.M,
-            HT(KC.N, KC.LSFT),
-            HT(KC.E, KC.LCTL),
-            HT(KC.I, KC.LALT),
-            HT(KC.O, KC.LGUI),
-
-            LT(3, KC.Z),
-            HT(KC.X, KC.RALT),
-            KC.C,
-            KC.D,
-            KC.V,
-            KC.K,
-            KC.H,
-            KC.COMM,
-            HT(KC.DOT, KC.RALT),
-            LT(3, KC.SLSH),
-
-            # LT(6, KC.ESC),  # TODO: Ferris Sweep does not have this key (use combo layers)
-            LT(4, KC.SPC),
-            LT(5, KC.TAB),
-
-            LT(8, KC.ENT),
-            LT(7, KC.BSPC),
-            # LT(9, KC.DEL),  # TODO: Ferris Sweep does not have this key (use combo layers)
+            KC.Q,       KC.W,       KC.F,       KC.P,       KC.B,       KC.J,       KC.L,       KC.U,       KC.Y,       KC.QUOT,
+            HT_A_LGUI,  HT_R_LALT,  HT_S_LCTL,  HT_T_LSFT,  KC.G,       KC.M,       HT_N_SHFT,  HT_E_LCTL,  HT_I_LALT,  HT_O_LGUI,
+            LT_3_Z,     KC.X,       KC.C,       KC.D,       KC.V,       KC.K,       KC.H,       KC.COMM,    KC.DOT,     LT_3_SLSH,
+                                            LT(4, KC.SPC), LT(5, KC.TAB), LT(8, KC.ENT), LT(7, KC.BSPC),
         ],
         # EXTRA - 1
         [
@@ -111,96 +104,24 @@ def apply(keyboard: KMKKeyboard):
         ],
         # TAP - 2
         [
-            KC.Q,
-            KC.W,
-            KC.F,
-            KC.P,
-            KC.B,
-            KC.J,
-            KC.L,
-            KC.U,
-            KC.Y,
-            KC.QUOT,
-
-            KC.A,
-            KC.R,
-            KC.S,
-            KC.T,
-            KC.G,
-            KC.M,
-            KC.N,
-            KC.E,
-            KC.I,
-            KC.O,
-
-            KC.Z,
-            KC.X,
-            KC.C,
-            KC.D,
-            KC.V,
-            KC.K,
-            KC.H,
-            KC.COMM,
-            KC.DOT,
-            KC.SLSH,
-
-            # KC.ESC,  # TODO: Ferris Sweep does not have this key
-            KC.SPC,
-            KC.TAB,
-            
-            KC.ENT,
-            KC.BSPC,
-            # KC.DEL,  # TODO: Ferris Sweep does not have this key
+            KC.Q,       KC.W,       KC.F,       KC.P,       KC.B,       KC.J,       KC.L,       KC.U,       KC.Y,       KC.QUOT,
+            KC.A,       KC.R,       KC.S,       KC.T,       KC.G,       KC.M,       KC.N,       KC.E,       KC.I,       KC.O,
+            KC.Z,       KC.X,       KC.C,       KC.D,       KC.V,       KC.K,       KC.H,       KC.COMM,    KC.DOT,     KC.SLSH,
+                                                KC.SPC,     KC.TAB,     KC.ENT,     KC.BSPC,
         ],
         # BUTTON - 3
         [
-            KC.NO,
-            KC.LSFT(KC.DEL),
-            KC.LCTL(KC.INS),
-            KC.LSFT(KC.INS),
-            KC.NO,
-            KC.NO,
-            KC.LSFT(KC.INS),
-            KC.LCTL(KC.INS),
-            KC.LSFT(KC.DEL),
-            KC.NO,
-
-            KC.LGUI,
-            KC.LALT,
-            KC.LCTL,
-            KC.LSFT,
-            KC.NO,
-            KC.NO,
-            KC.LSFT,
-            KC.LCTL,
-            KC.LALT,
-            KC.LGUI,
-            
-            KC.NO,
-            KC.LSFT(KC.DEL),
-            KC.LCTL(KC.INS),
-            KC.LSFT(KC.INS),
-            KC.NO,
-            KC.NO,
-            KC.LSFT(KC.INS),
-            KC.LCTL(KC.INS),
-            KC.LSFT(KC.DEL),
-            KC.NO,
-
-            # KC.MB_MMB,  # TODO: Ferris Sweep does not have this key
-            KC.MB_LMB,
-            KC.MB_RMB,
-            
-            KC.MB_RMB,
-            KC.MB_LMB,
-            # KC.MB_MMB,  # TODO: Ferris Sweep does not have this key
+            KC.NO,              KC.LSFT(KC.DEL),    KC.LCTL(KC.INS),    KC.LSFT(KC.INS),    KC.NO,              KC.NO,              KC.LSFT(KC.INS),    KC.LCTL(KC.INS),    KC.LSFT(KC.DEL),    KC.NO,
+            KC.LGUI,            KC.LALT,            KC.LCTL,            KC.LSFT,            KC.NO,              KC.NO,              KC.LSFT,            KC.LCTL,            KC.LALT,            KC.LGUI,
+            KC.NO,              KC.LSFT(KC.DEL),    KC.LCTL(KC.INS),    KC.LSFT(KC.INS),    KC.NO,              KC.NO,              KC.LSFT(KC.INS),    KC.LCTL(KC.INS),    KC.LSFT(KC.DEL),    KC.NO,
+                                                                        KC.MB_LMB,          KC.MB_RMB,          KC.MB_RMB,          KC.MB_LMB,
         ],
         # NAV - 4
         [
-            KC.TD(KC.NO, KC.RELOAD, tap_time=200),
-            KC.TD(KC.NO, KC.DF(2), tap_time=200),
-            KC.TD(KC.NO, KC.DF(1), tap_time=200),
-            KC.TD(KC.NO, KC.DF(0), tap_time=200),
+            TD(KC.NO, KC.RELOAD),
+            TD(KC.NO, KC.DF(2)),
+            TD(KC.NO, KC.DF(1)),
+            TD(KC.NO, KC.DF(0)),
             KC.NO,
             KC.NO,
             KC.LSFT(KC.INS),
@@ -213,7 +134,7 @@ def apply(keyboard: KMKKeyboard):
             KC.LCTL,
             KC.LSFT,
             KC.NO,
-            KC.TD(KC.CW, KC.CAPS, tap_time=200),
+            TD(KC.CW, KC.CAPS),
             KC.LEFT,
             KC.DOWN,
             KC.UP,
@@ -221,8 +142,8 @@ def apply(keyboard: KMKKeyboard):
 
             KC.NO,
             KC.RALT,
-            KC.TD(KC.NO, KC.DF(7), tap_time=200),
-            KC.TD(KC.NO, KC.DF(4), tap_time=200),
+            TD(KC.NO, KC.DF(7)),
+            TD(KC.NO, KC.DF(4)),
             KC.NO,
             KC.INS,
             KC.HOME,
@@ -239,10 +160,10 @@ def apply(keyboard: KMKKeyboard):
         ],
         # MOUSE - 5
         [
-            KC.TD(KC.NO, KC.RELOAD, tap_time=200),
-            KC.TD(KC.NO, KC.DF(2), tap_time=200),
-            KC.TD(KC.NO, KC.DF(1), tap_time=200),
-            KC.TD(KC.NO, KC.DF(0), tap_time=200),
+            TD(KC.NO, KC.RELOAD),
+            TD(KC.NO, KC.DF(2)),
+            TD(KC.NO, KC.DF(1)),
+            TD(KC.NO, KC.DF(0)),
             KC.NO,
             KC.NO,
             KC.LSFT(KC.INS),
@@ -263,8 +184,8 @@ def apply(keyboard: KMKKeyboard):
 
             KC.NO,
             KC.RALT,
-            KC.TD(KC.NO, KC.DF(8), tap_time=200),
-            KC.TD(KC.NO, KC.DF(5), tap_time=200),
+            TD(KC.NO, KC.DF(8)),
+            TD(KC.NO, KC.DF(5)),
             KC.NO,
             KC.NO,
             KC.NO,
@@ -281,10 +202,10 @@ def apply(keyboard: KMKKeyboard):
         ],
         # MEDIA - 6
         [
-            KC.TD(KC.NO, KC.RELOAD, tap_time=200),
-            KC.TD(KC.NO, KC.DF(2), tap_time=200),
-            KC.TD(KC.NO, KC.DF(1), tap_time=200),
-            KC.TD(KC.NO, KC.DF(0), tap_time=200),
+            TD(KC.NO, KC.RELOAD),
+            TD(KC.NO, KC.DF(2)),
+            TD(KC.NO, KC.DF(1)),
+            TD(KC.NO, KC.DF(0)),
             KC.NO,
             KC.NO,
             KC.NO,
@@ -305,8 +226,8 @@ def apply(keyboard: KMKKeyboard):
             
             KC.NO,
             KC.RALT,
-            KC.TD(KC.NO, KC.DF(9), tap_time=200),
-            KC.TD(KC.NO, KC.DF(6), tap_time=200),
+            TD(KC.NO, KC.DF(9)),
+            TD(KC.NO, KC.DF(6)),
             KC.NO,
             KC.HID,
             KC.NO,
@@ -329,10 +250,10 @@ def apply(keyboard: KMKKeyboard):
             KC.N9,
             KC.RBRC,
             KC.NO,
-            KC.TD(KC.NO, KC.DF(0), tap_time=200),
-            KC.TD(KC.NO, KC.DF(1), tap_time=200),
-            KC.TD(KC.NO, KC.DF(2), tap_time=200),
-            KC.TD(KC.NO, KC.RELOAD, tap_time=200),
+            TD(KC.NO, KC.DF(0)),
+            TD(KC.NO, KC.DF(1)),
+            TD(KC.NO, KC.DF(2)),
+            TD(KC.NO, KC.RELOAD),
 
             KC.SCLN,
             KC.N4,
@@ -351,8 +272,8 @@ def apply(keyboard: KMKKeyboard):
             KC.N3,
             KC.BSLS,
             KC.NO,
-            KC.TD(KC.NO, KC.DF(7), tap_time=200),
-            KC.TD(KC.NO, KC.DF(4), tap_time=200),
+            TD(KC.NO, KC.DF(7)),
+            TD(KC.NO, KC.DF(4)),
             KC.RALT,
             KC.NO,
 
@@ -371,10 +292,10 @@ def apply(keyboard: KMKKeyboard):
             KC.LPRN,
             KC.RCBR,
             KC.NO,
-            KC.TD(KC.NO, KC.DF(0), tap_time=200),
-            KC.TD(KC.NO, KC.DF(1), tap_time=200),
-            KC.TD(KC.NO, KC.DF(2), tap_time=200),
-            KC.TD(KC.NO, KC.RELOAD, tap_time=200),
+            TD(KC.NO, KC.DF(0)),
+            TD(KC.NO, KC.DF(1)),
+            TD(KC.NO, KC.DF(2)),
+            TD(KC.NO, KC.RELOAD),
 
             KC.COLN,
             KC.DLR,
@@ -393,8 +314,8 @@ def apply(keyboard: KMKKeyboard):
             KC.HASH,
             KC.PIPE,
             KC.NO,
-            KC.TD(KC.NO, KC.DF(8), tap_time=200),
-            KC.TD(KC.NO, KC.DF(5), tap_time=200),
+            TD(KC.NO, KC.DF(8)),
+            TD(KC.NO, KC.DF(5)),
             KC.RALT,
             KC.NO,
             
@@ -413,10 +334,10 @@ def apply(keyboard: KMKKeyboard):
             KC.F9,
             KC.PSCR,
             KC.NO,
-            KC.TD(KC.NO, KC.DF(0), tap_time=200),
-            KC.TD(KC.NO, KC.DF(1), tap_time=200),
-            KC.TD(KC.NO, KC.DF(2), tap_time=200),
-            KC.TD(KC.NO, KC.RELOAD, tap_time=200),
+            TD(KC.NO, KC.DF(0)),
+            TD(KC.NO, KC.DF(1)),
+            TD(KC.NO, KC.DF(2)),
+            TD(KC.NO, KC.RELOAD),
 
             KC.F11,
             KC.F4,
@@ -435,8 +356,8 @@ def apply(keyboard: KMKKeyboard):
             KC.F3,
             KC.PAUS,
             KC.NO,
-            KC.TD(KC.NO, KC.DF(9), tap_time=200),
-            KC.TD(KC.NO, KC.DF(6), tap_time=200),
+            TD(KC.NO, KC.DF(9)),
+            TD(KC.NO, KC.DF(6)),
             KC.RALT,
             KC.NO,
 
@@ -448,6 +369,7 @@ def apply(keyboard: KMKKeyboard):
             # KC.NO,  # TODO: Ferris Sweep does not have this key
         ],
     ]
+    # fmt: off
 
 layer_names_list = [
     "Base",
