@@ -3,7 +3,6 @@
 from kb import KMKKeyboard
 from kmk.keys import KC, Key
 from kmk.modules.capsword import CapsWord
-from kmk.modules.layers import Layers
 from kmk.modules.power import Power
 from kmk.modules.tapdance import TapDance
 
@@ -165,6 +164,7 @@ def apply(keyboard: KMKKeyboard):
             KC.LCTL(KC.INS),
             KC.LSFT(KC.DEL),
             KC.NO,
+
             KC.LGUI,
             KC.LALT,
             KC.LCTL,
@@ -175,6 +175,7 @@ def apply(keyboard: KMKKeyboard):
             KC.LCTL,
             KC.LALT,
             KC.LGUI,
+            
             KC.NO,
             KC.LSFT(KC.DEL),
             KC.LCTL(KC.INS),
